@@ -5,6 +5,8 @@ type CanvasProps = {
 };
 const Canvas = ({ settings }: CanvasProps) => {
 
+    const [canvasClear, setCanvasClear] = useState(true);
+
     const canvas = useRef<HTMLCanvasElement>(null);
     let ctx: CanvasRenderingContext2D | null = null; // This will be initialized when DOM loads
     const displayAllowed = settings.debug || false;
@@ -96,6 +98,12 @@ const Canvas = ({ settings }: CanvasProps) => {
 
         // Clear canvas
         ctx.clearRect(0, 0, canvas.current!.width, canvas.current!.height);
+
+        // Clear shape label
+        setShapeLabel("");
+
+        // Clear canvas
+        setCanvasClear(true);
     }
 
     function dumpCanvas(ctx: CanvasRenderingContext2D | null): number[][] {
@@ -285,7 +293,15 @@ const Canvas = ({ settings }: CanvasProps) => {
 
     return (
         <div className='canvas'>
-            <canvas ref={canvas} id='canvas' width={settings.maxWidth} height={settings.maxHeight} />
+            <div className="canvas-container" onMouseDown={() => setCanvasClear(false)}>
+                <canvas ref={canvas} id='canvas' width={settings.maxWidth} height={settings.maxHeight} />
+                { canvasClear && (
+                    <img src="/images/help.gif" alt="help" className="canvas-help" width={settings.maxWidth} height={settings.maxHeight} style={{
+                        'maxWidth': settings.maxWidth,
+                        'maxHeight': settings.maxHeight
+                    }}/>
+                )}
+            </div>
             <span className="canvas-label">{shapeLabel.length > 0 && "This is a "}<span className="italic">{shapeLabel}</span></span>
             {displayAllowed &&
                 (<div className="canvas-shapes">
