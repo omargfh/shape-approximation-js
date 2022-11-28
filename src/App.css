@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
 body {
     margin: 0;
     padding: 0;
@@ -36,4 +38,14 @@ span {
     color: #fff;
     text-align: center;
     padding-top: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    width: -webkit-fill-available;
+    width: 100%;
+    display: block;
+}
+
+.italic {
+    display: inline;
+    font-style: italic;
 }

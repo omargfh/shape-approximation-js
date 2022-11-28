@@ -10,12 +10,13 @@ const settings = {
 function App() {
   return (
     <div id='App'>
+      <img src="/images/logo.png" alt='logo' width="400" />
       <Canvas settings={settings} />
-      <div id='shapes'>
+      {/* <div id='shapes'>
         <div id='square'/>
         <div id='ellipse'/>
         <div id='line'/>
-      </div>
+      </div> */}
     </div>
   );
 }

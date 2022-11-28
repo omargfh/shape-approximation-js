@@ -287,7 +287,7 @@ const Canvas = ({ settings }: CanvasProps) => {
     return (
         <div className='canvas'>
             <canvas ref={canvas} id='canvas' width={settings.maxWidth} height={settings.maxHeight} />
-            {shapeLabel.length > 0 && <span>This is a {shapeLabel}</span>}
+            {shapeLabel.length > 0 && <span>This is a <span className="italic">{shapeLabel}</span></span>}
         </div>
     )
 }
