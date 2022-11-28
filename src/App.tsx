@@ -5,18 +5,21 @@ import Canvas from './components/Canvas';
 const settings = {
   "maxWidth": 500,
   "maxHeight": 400,
+  "debug": true,
 }
 
 function App() {
   return (
     <div id='App'>
-      <img src="/images/logo.png" alt='logo' width="400" />
+      <div className='circles'>
+        {['top', 'bottom'].map((position) => {
+          return (
+            <div className={['circle', 'circle-' + position].join(' ')}></div>
+          )
+        })}
+      </div>
+      <img className="logo" src="/images/logo.png" alt='logo' width="400" />
       <Canvas settings={settings} />
-      {/* <div id='shapes'>
-        <div id='square'/>
-        <div id='ellipse'/>
-        <div id='line'/>
-      </div> */}
     </div>
   );
 }

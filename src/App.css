@@ -49,3 +49,47 @@ span {
     display: inline;
     font-style: italic;
 }
+
+.circle {
+    position: fixed;
+    width: 400;
+    height: 400px;
+    width: 400px;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(100px);
+}
+
+.circle.circle-bottom {
+    bottom: -10%;
+    right: -10%;
+    background: #d74cc4;
+}
+
+.circle.circle-top {
+    top: -10%;
+    left: -10%;
+    background: #4cb4d7;
+}
+
+.logo {
+    mix-blend-mode: screen;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow:  0 0 60px #bebebe2e;
+}
+
+.canvas-label {
+    min-height: 32px;
+}
+
+.canvas-shapes {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    transform: scale(0.7);
+}
+
+.display-none {
+    display: none;
+}

@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 type CanvasProps = {
     settings: Record<string, any>;
 };
-
 const Canvas = ({ settings }: CanvasProps) => {
 
     const canvas = useRef<HTMLCanvasElement>(null);
     let ctx: CanvasRenderingContext2D | null = null; // This will be initialized when DOM loads
+    const displayAllowed = settings.debug || false;
 
     // Avoiding state access in event listener
     const [_isDrawing, _setIsDrawing] = useState(false);
@@ -21,8 +21,8 @@ const Canvas = ({ settings }: CanvasProps) => {
 
     function resizeCanvas() {
         if (canvas.current) {
-            canvas.current.width = window.innerWidth > settings.maxWidth ? settings.maxWidth : window.innerWidth;
-            canvas.current.height = window.innerHeight > settings.maxHeight ? settings.maxHeight : window.innerHeight;
+            canvas.current.width = window.innerWidth - 40 > settings.maxWidth ? settings.maxWidth : window.innerWidth - 40;
+            canvas.current.height = window.innerHeight - 40 > settings.maxHeight ? settings.maxHeight : window.innerHeight - 40;
         }
     }
 
@@ -178,7 +178,6 @@ const Canvas = ({ settings }: CanvasProps) => {
         if (!virtualCtx) return {};
         virtualCtx.lineWidth = 25;
 
-        const displayAllowed = false;
         function displayIn(id: string) {
             if (!displayAllowed) return;
             let tmpCanvas = document.createElement('canvas');
@@ -287,7 +286,14 @@ const Canvas = ({ settings }: CanvasProps) => {
     return (
         <div className='canvas'>
             <canvas ref={canvas} id='canvas' width={settings.maxWidth} height={settings.maxHeight} />
-            {shapeLabel.length > 0 && <span>This is a <span className="italic">{shapeLabel}</span></span>}
+            <span className="canvas-label">{shapeLabel.length > 0 && "This is a "}<span className="italic">{shapeLabel}</span></span>
+            {displayAllowed &&
+                (<div className="canvas-shapes">
+                    <div id='square' className={shapeLabel.toLowerCase() !== 'square' ? 'display-none' : ''}/>
+                    <div id='ellipse' className={shapeLabel.toLowerCase() !== 'ellipse' ? 'display-none' : ''}/>
+                    <div id='line' className={shapeLabel.toLowerCase() !== 'line' ? 'display-none' : ''}/>
+                </div>)
+            }
         </div>
     )
 }
